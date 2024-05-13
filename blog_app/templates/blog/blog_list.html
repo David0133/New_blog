@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Blog's</title>
+</head>
+
+<body class="bg-gray-200">
+    
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-center text-white font-bold">
+                BLOG GO
+            </div>
+        </div>
+    </nav>
+    
+    <div class="blog-list-container mt-2">
+        <div class="back">
+                
+        </div>
+        <div class="left">
+            <a href="{% url 'add_blog' %}" class="add-blog">
+                <i class="fas fa-plus"></i> Add Blog
+            </a>
+        </div>
+        <div class="center">
+            {% if blogs %}
+            {% for blog in blogs %}
+            
+            <div class="blog-header">
+                <div class="back">
+                
+                </div>
+                <span>{{blog.title}}</span>
+                <i class="fas fa-ellipsis-v dot"></i>
+                <div class="change-menu">
+                    <a href="{% url 'delete_post' blog.id %}" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'edit_post' blog.id %}" class="edit-btn"><i class="fas fa-edit"></i></a>
+                </div>
+            </div>
+            <div class="blog-content">
+                <img src="{{blog.image.url}}" alt="img">
+                <p>{{blog.story}}</p>
+                <a href="{% url 'full_blog' blog.id %}" class="read-more-btn"><button class="read-more text-white font-bold">Read
+                        More</button></a>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if not blogs %}
+            <h1>No Blog Found</h1>
+            {% endif %}
+        </div>
+        <div class="right flex items-center flex-col text-lime-950 font-bold">
+            <h1>Featured</h1>
+            <div class=" flex items-center flex-col text-lime-950 mt-4" >
+            {% for blog in blogs %}
+            <a href="{% url 'full_blog' blog.id %}">{{blog.title}}</a>
+            {% endfor %}
+            </div>
+
+        </div>
+    </div>
+<script src="{% static 'blog/main.js' %}"></script>
+</body>
+
+</html>

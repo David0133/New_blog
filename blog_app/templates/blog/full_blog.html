@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{blog.title}}</title>
+</head>
+
+<body class="bg-gray-200" id="full">
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <a href="{% url 'blog_list' %}">
+                <div class="relative flex h-16 items-center justify-center text-white font-bold">
+                    BLOG GO
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div class="full-post-container">
+        <h1>{{blog.title}}</h1>
+        <img src="{{blog.image.url}}" alt="img">
+        <span><p>{{blog.story}}</p></span>
+        <span><a href="{% url 'edit_post' blog.id %}"><i class="fas fa-edit"></i></a></span>
+    </div>
+
+    <script src="{% static 'blog/full.js' %}"></script>
+</body>
+
+</html>

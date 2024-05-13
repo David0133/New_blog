@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'blog/style.css' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="edit-form">
+    <form action="{% url 'edit_post' id %}" method="post" >
+        {% csrf_token %}
+        <fieldset>
+            <h1>Edit Story</h1>
+            <textarea name="story" id="" cols="60" rows="5" minlength="100" style="resize: none; height: 250px;" onchange="authenticate()" ></textarea>
+        </fieldset>
+        <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" id="edit-btn" disabled>Submit</button>
+    </form>
+</div>
+<script>
+    const btn = document.getElementById('edit-btn')
+    function authenticate(){
+        const len =  document.getElementsByTagName('textarea')[0].value.length
+        const textarea =  document.getElementsByTagName('textarea')[0]
+        console.log("entered");
+        if(len < 50){
+            textarea.style.outline = "2px solid red";
+        }
+        else if(len > 50 && len < 150){
+            textarea.style.outline = "2px solid yellow";
+        }
+        else if(len > 150){
+            textarea.style.outline = "2px solid green";
+            btn.disabled = false
+        }
+        
+    }
+</script>
